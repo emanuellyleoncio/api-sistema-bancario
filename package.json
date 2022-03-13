@@ -1,0 +1,17 @@
+{
+  "name": "api-sistema-bancario",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "date-fns": "^2.28.0",
+    "express": "^4.17.3",
+    "nodemon": "^2.0.15"
+  }
+}
