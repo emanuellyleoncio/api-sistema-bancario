@@ -1,3 +1,4 @@
+![Logo do projeto](https://github.com/emanuellyleoncio/api-sistema-bancario/blob/main/public/readme_images/logo.png)
 
 # Sistema Bancário :moneybag:
 
@@ -7,15 +8,24 @@ Este projeto consiste na criação de uma API de sistema bancário.
 
 ## Tabela de conteúdos
 
-<!--ts-->
-   * [Descrição do Projeto](#descricao-projeto)
-   * [Tabela de Conteudo](#tabela-de-conteudo)
-   * [Status](#status)
-   * [Instalação](#instalacao)
-   * [Como usar](#como-usar)
-   * [Tecnologias](#tecnologias)
-   * [Autora](#autora)
-<!--te-->
+- [Descrição do Projeto](#descrição-do-projeto)
+- [Tabela de Conteúdo](#tabela-de-conteúdo)
+- [Status](#status)
+- [Instalação](#instalação)
+	- [Pré-requisitos](#pré-requisitos)
+	- [Instalação](#instalação)
+- [Como usar](#como-usar)
+	- [Criar contas bancárias](#criar-contas-bancárias) 
+   	- [Listar contas bancárias](#listar-contas-bancárias)
+   	- [Atualizar usuário da conta bancária](#atualizar-usuários-da-conta-bancária)
+   	- [Excluir conta](#excluir-conta)
+   	- [Depositar](#depositar)
+   	- [Sacar](#sacar)
+   	- [Transferir](#transferir)
+   	- [Saldo](#saldo)
+   	- [Extrato](#extrato)
+ - [Tecnologias](#tecnologias)
+ - [Autora](#autora)
 
 ## Status
 
@@ -26,10 +36,10 @@ Projeto finalizado :heavy_check_mark:
 ### Pré-requisitos
 
 Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
-[Git](https://git-scm.com), [Node.js](https://nodejs.org/en/). 
-Além disto é bom ter um editor para trabalhar com o código como [VSCode](https://code.visualstudio.com/)
+[Git](https://git-scm.com) e [Node.js](https://nodejs.org/en/).
+Além disto é bom ter um editor para trabalhar com o código como [VSCode](https://code.visualstudio.com/) e um programa para testar as requisições como o [Insomnia](https://insomnia.rest/download).
 
-## Instalação
+### Instalação
 
 ```bash
 # Clone este repositório
@@ -44,10 +54,11 @@ $ npm install nodemon
 $ npm install date-fns --save
 
 # No arquivo package.json, altere o scrip para "dev": "nodemon ./src/index.js"
-$ npm run dev:server
 
 # Execute a aplicação
 $ npm run dev
+
+# Realize os testes utilizando o Insomnia
 
 ```
 
@@ -65,13 +76,15 @@ Esta API permite as seguintes funcionalidades:
 -   Consultar saldo da conta bancária
 -   Emitir extrato bancário
 
-### Criar conta bancária
+Para os testes, utiliza-se a seguinte porta: **http://localhost:3000**
+
+### 1 - Criar conta bancária
 
 #### `POST` `/contas`
 
 Esse endpoint cria uma conta bancária, onde será gerado um número único para identificação da conta (número da conta).
 
-**Requisição** - O corpo (body) deverá possuir um objeto com as seguintes propriedades (respeitando estes nomes):
+O corpo (body) deverá possuir um objeto com as seguintes propriedades (respeitando estes nomes):
 
     -   nome
     -   cpf
@@ -80,92 +93,21 @@ Esse endpoint cria uma conta bancária, onde será gerado um número único para
     -   email
     -   senha
 
-#### Exemplo de Requisição
+#### Exemplo de requisição efetuada:
 
-```javascript
-// POST /contas
-{
-    "nome": "Foo Bar 2",
-    "cpf": "00011122234",
-    "data_nascimento": "2021-03-15",
-    "telefone": "71999998888",
-    "email": "foo@bar2.com",
-    "senha": "12345"
-}
-```
+![criar conta](https://github.com/emanuellyleoncio/api-sistema-bancario/blob/main/public/readme_images/criar_conta.JPG)
 
-### Listar contas bancárias
+### 2 - Listar contas bancárias
 
 #### `GET` `/contas?senha_banco=Cubos123Bank`
 
-Esse endpoint lista todas as contas bancárias existentes. Para acessa-lo deve ser informado a seguinte senha: **Cubos123Bank**
+Esse endpoint lista todas as contas bancárias existentes. Para acessá-lo deve ser informado a seguinte senha: **Cubos123Bank**
 
-#### Exemplo de resposta
+#### Exemplo de requisição efetuada:
 
-```javascript
-// HTTP Status 200 / 201 / 204
-// 2 contas encontradas
-[
-    {
-        "numero": "1",
-        "saldo": 0,
-        "usuario": {
-            "nome": "Foo Bar",
-            "cpf": "00011122233",
-            "data_nascimento": "2021-03-15",
-            "telefone": "71999998888",
-            "email": "foo@bar.com",
-            "senha": "1234"
-        }
-    },
-    {
-        "numero": "2",
-        "saldo": 1000,
-        "usuario": {
-            "nome": "Foo Bar 2",
-            "cpf": "00011122234",
-            "data_nascimento": "2021-03-15",
-            "telefone": "71999998888",
-            "email": "foo@bar2.com",
-            "senha": "12345"
-        }
-    }
-]
+![conta](https://github.com/emanuellyleoncio/api-sistema-bancario/blob/main/public/readme_images/listar_contas.JPG)
 
-
-```
-
-### Criar conta bancária
-
-#### `POST` `/contas`
-
-Esse endpoint criaruma conta bancária, onde será gerado um número único para identificação da conta (número da conta).
-
-O corpo (body) deve possuir um objeto com as seguintes propriedades (respeitando estes nomes):
-
-    -   nome
-    -   cpf
-    -   data_nascimento
-    -   telefone
-    -   email
-    -   senha
-
-
-#### Exemplo de Requisição
-
-```javascript
-// POST /contas
-{
-    "nome": "Foo Bar 2",
-    "cpf": "00011122234",
-    "data_nascimento": "2021-03-15",
-    "telefone": "71999998888",
-    "email": "foo@bar2.com",
-    "senha": "12345"
-}
-```
-
-### Atualizar usuário da conta bancária
+### 3 - Atualizar usuário da conta bancária
 
 #### `PUT` `/contas/:numeroConta/usuario`
 
@@ -180,31 +122,23 @@ O corpo (body) deverá possuir um objeto com todas as seguintes propriedades (re
     -   email
     -   senha
 
+#### Exemplo de requisição efetuada:
 
-#### Exemplo de Requisição
-```javascript
-// PUT /contas/:numeroConta/usuario
-{
-    "nome": "Foo Bar 3",
-    "cpf": "99911122234",
-    "data_nascimento": "2021-03-15",
-    "telefone": "71999998888",
-    "email": "foo@bar3.com",
-    "senha": "12345"
-{
-```
+![conta](https://github.com/emanuellyleoncio/api-sistema-bancario/blob/main/public/readme_images/atualizar_conta.JPG)
 
-
-### Excluir Conta
+### 4 - Excluir Conta
 
 #### `DELETE` `/contas/:numeroConta`
 
 Esse endpoint exclui uma conta bancária existente.
 
-Na requisição, deve ser passado o número da conta (como parâmetro na rota)
+Na requisição, deve ser passado o número da conta (como parâmetro na rota).
 
+#### Exemplo de requisição efetuada:
 
-### Depositar
+![conta](https://github.com/emanuellyleoncio/api-sistema-bancario/blob/main/public/readme_images/deletar_conta.JPG)
+
+### 5 - Depositar
 
 #### `POST` `/transacoes/depositar`
 
@@ -215,27 +149,11 @@ O corpo (body) deverá possuir um objeto com as seguintes propriedades (respeita
     -   numero_conta
     -   valor
 
+#### Exemplo de requisição efetuada:
 
-#### Exemplo de Requisição
-```javascript
-// POST /transacoes/depositar
-{
-	"numero_conta": "1",
-	"valor": 1900
-}
-```
+![conta](https://github.com/emanuellyleoncio/api-sistema-bancario/blob/main/public/readme_images/deposito.JPG)
 
-#### Exemplo do registro de um depósito
-
-```javascript
-{
-    "data": "2021-08-10 23:40:35",
-    "numero_conta": "1",
-    "valor": 10000
-}
-```
-
-### Sacar
+### 6 - Sacar
 
 #### `POST` `/transacoes/sacar`
 
@@ -247,28 +165,11 @@ O corpo (body) deverá possuir um objeto com as seguintes propriedades (respeita
     -   valor
     -   senha
 
+#### Exemplo de requisição efetuada:
 
-#### Exemplo de Requisição
-```javascript
-// POST /transacoes/sacar
-{
-	"numero_conta": "1",
-	"valor": 1900,
-    "senha": "123456"
-}
-```
+![conta](https://github.com/emanuellyleoncio/api-sistema-bancario/blob/main/public/readme_images/saque.JPG)
 
-#### Exemplo do registro de um saque
-
-```javascript
-{
-    "data": "2021-08-10 23:40:35",
-    "numero_conta": "1",
-    "valor": 10000
-}
-```
-
-### Tranferir
+### 7 - Tranferir
 
 #### `POST` `/transacoes/transferir`
 
@@ -281,30 +182,11 @@ O corpo (body) deverá possuir um objeto com as seguintes propriedades (respeita
     -   valor
     -   senha
 
+#### Exemplo de requisição efetuada:
 
-#### Exemplo de Requisição
-```javascript
-// POST /transacoes/transferir
-{
-	"numero_conta_origem": "1",
-	"numero_conta_destino": "2",
-	"valor": 200,
-	"senha": "123456"
-}
-```
+![conta](https://github.com/emanuellyleoncio/api-sistema-bancario/blob/main/public/readme_images/transferencia.JPG)
 
-#### Exemplo do registro de uma transferência
-
-```javascript
-{
-    "data": "2021-08-10 23:40:35",
-    "numero_conta_origem": "1",
-    "numero_conta_destino": "2",
-    "valor": 10000
-}
-```
-
-### Saldo
+### 8 - Saldo
 
 #### `GET` `/contas/saldo?numero_conta=123&senha=123`
 
@@ -312,22 +194,11 @@ Esse endpoint retorna o saldo de uma conta bancária.
 
 Na requisição, deve ser informada na url (query params) o número da conta e a senha.
 
-#### Exemplo de Resposta
+#### Exemplo de requisição efetuada:
 
-```javascript
-// HTTP Status 200 / 201 / 204
-{
-    "saldo": 13000
-}
-```
-```javascript
-// HTTP Status 400 / 401 / 403 / 404
-{
-    "mensagem": "Conta bancária não encontada!"
-}
-```
+![conta](https://github.com/emanuellyleoncio/api-sistema-bancario/blob/main/public/readme_images/saldo.JPG)
 
-### Extrato
+### 9 - Extrato
 
 #### `GET` `/contas/extrato?numero_conta=123&senha=123`
 
@@ -335,54 +206,9 @@ Esse endpoint lista as transações realizadas de uma conta específica.
 
 Na requisição, deve ser informada na url (query params) o número da conta e a senha.
 
-#### Exemplo de Resposta
+#### Exemplo de requisição efetuada:
 
-```javascript
-// HTTP Status 200 / 201 / 204
-{
-  "depositos": [
-    {
-      "data": "2021-08-18 20:46:03",
-      "numero_conta": "1",
-      "valor": 10000
-    },
-    {
-      "data": "2021-08-18 20:46:06",
-      "numero_conta": "1",
-      "valor": 10000
-    }
-  ],
-  "saques": [
-    {
-      "data": "2021-08-18 20:46:18",
-      "numero_conta": "1",
-      "valor": 1000
-    }
-  ],
-  "transferenciasEnviadas": [
-    {
-      "data": "2021-08-18 20:47:10",
-      "numero_conta_origem": "1",
-      "numero_conta_destino": "2",
-      "valor": 5000
-    }
-  ],
-  "transferenciasRecebidas": [
-    {
-      "data": "2021-08-18 20:47:24",
-      "numero_conta_origem": "2",
-      "numero_conta_destino": "1",
-      "valor": 2000
-    },
-    {
-      "data": "2021-08-18 20:47:26",
-      "numero_conta_origem": "2",
-      "numero_conta_destino": "1",
-      "valor": 2000
-    }
-  ]
-}
-```
+![conta](https://github.com/emanuellyleoncio/api-sistema-bancario/blob/main/public/readme_images/extrato.JPG)
 
 ## Tecnologias
 
@@ -390,7 +216,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 - [Node.js](https://nodejs.org/en/)
 - [Javascript](https://www.javascript.com/)
-
+- [Insomnia](https://insomnia.rest/download)
 
 ## Autora
 
