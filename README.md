@@ -94,7 +94,6 @@ Esse endpoint cria uma conta bancária, onde será gerado um número único para
 }
 ```
 
-
 ### Listar contas bancárias
 
 #### `GET` `/contas?senha_banco=Cubos123Bank`

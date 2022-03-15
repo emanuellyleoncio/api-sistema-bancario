@@ -40,7 +40,6 @@ const deposito = (req, res) => {
     numeroContaEncontrada.saldo = numeroContaEncontrada.saldo + valor;
 
     return res.status(201).json();
-
 };
 
 const saque = (req, res) => {
