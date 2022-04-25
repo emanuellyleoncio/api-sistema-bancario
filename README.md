@@ -48,12 +48,12 @@ $ git clone <https://github.com/emanuellyleoncio/api-sistema-bancario>
 # Acesse a pasta do projeto no terminal ou Git Bash
 
 # Instale as dependências
-$ npm install -y
+$ npm init -y
 $ npm install express
 $ npm install nodemon
 $ npm install date-fns --save
 
-# No arquivo package.json, altere o scrip para "dev": "nodemon ./src/index.js"
+# No arquivo package.json, altere o script para "dev": "nodemon ./src/index.js"
 
 # Execute a aplicação
 $ npm run dev
